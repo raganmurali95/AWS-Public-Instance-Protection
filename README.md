@@ -1,42 +1,48 @@
-# AWS-Public-Instance-Protection
-
 🔐 AWS Auto-Defense: Dynamic Threat Detection and Blocking System
 📌 Overview
-This project aims to enhance security in AWS public cloud environments by developing an automated system that detects and blocks unauthorized access attempts in real-time. Using CloudWatch Logs, Python scripting, and Network Access Control Lists (ACLs), this system actively monitors activity and dynamically updates subnet rules to prevent threats like brute-force attacks and resource exhaustion.
+This project enhances security in AWS public cloud environments by developing an automated system that detects and blocks malicious access attempts in real-time. Using CloudWatch Logs, Python scripting, and Network Access Control Lists (ACLs), the system actively monitors activity and dynamically blocks attacker IPs to prevent brute-force, DoS, and resource exhaustion attacks.
 
 🚀 Key Features
-Real-time log analysis of EC2 instances using AWS CloudWatch
+Real-time analysis of EC2 login attempts using AWS CloudWatch
 
-Automatic IP blocking for attackers attempting unauthorized admin access
+Automatic IP extraction and blocking for unauthorized admin access
 
-Integration with Hydra attack simulation to test system robustness
+Dynamic rule updates in Network ACLs to neutralize threats
 
-Dynamic rule creation in Network ACLs to prevent future attack vectors
+Tested using Hydra brute-force tool to simulate attacks
 
-Leverages AWS WAF, CloudWatch, and Python scripts for automated mitigation
+Seamless integration with AWS WAF, CloudWatch, and custom Python scripts
 
 🛡️ How It Works
-An EC2 instance is hosted in a public subnet.
+An EC2 instance is launched in a public subnet.
 
-If a brute-force tool (e.g., Hydra) is used to attempt unauthorized admin login:
+The instance is accessed using PuTTY for remote SSH login.
 
-Login attempts are captured and logged in AWS CloudWatch.
+Hosting files are securely transferred from the local system to the EC2 instance using WinSCP.
 
-The logs are continuously monitored and analyzed using a Python script.
+If an attacker initiates a brute-force attempt (e.g., via Hydra):
 
-Upon detecting suspicious activity:
+Login attempts are logged in AWS CloudWatch.
+
+A Python script monitors and analyzes these logs.
+
+Upon detection of malicious patterns:
 
 The attacker’s IP address is extracted.
 
-A new Network ACL rule is dynamically created to block the IP.
+A new Network ACL rule is dynamically added to block the IP.
 
-This prevents further access attempts, reducing the risk of DoS attacks or resource abuse.
+This blocks further access attempts, mitigating potential damage.
 
 🧰 Technologies Used
-AWS CloudWatch – Log collection and monitoring
+AWS CloudWatch – Centralized log monitoring
 
-AWS WAF & Network ACLs – Threat mitigation
+AWS WAF & Network ACLs – Security enforcement
 
-Python – Scripting for log analysis and rule automation
+Python – Automated log analysis and rule management
 
-Hydra – Attack simulation for testing
+Hydra – Brute-force attack simulation
+
+PuTTY – Secure remote access to EC2 instances
+
+WinSCP – File transfer between local machine and cloud server
